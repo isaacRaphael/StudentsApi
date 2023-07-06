@@ -17,7 +17,10 @@ namespace StudentsApi
             builder.Services.AddControllers();
             builder.AddValidation();
             builder.AddDbConfiguration();
-            builder.AddAppServices();   
+            builder.AddAppServices();
+
+            var origiName = "myAllowedOrigin";
+            builder.AddCorsConfig(origiName);
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -27,10 +30,8 @@ namespace StudentsApi
             
             app.UseSwagger();
             app.UseSwaggerUI();
-            
-
+            app.UseCors(origiName);
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
             app.MapControllers();
             app.Run();
